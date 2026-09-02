@@ -74,7 +74,7 @@ const createRepo = (token, name) => {
     private: true,
     auto_init: true,
     description:
-      'Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub-3.0](https://github.com/raphaelheinz/LeetHub-3.0)',
+      'Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub Secure](https://github.com/MohammedAl-Alimi/leethub-secure)',
   };
   data = JSON.stringify(data);
 
@@ -319,7 +319,7 @@ $('#hook_button').on('click', () => {
       if (token === null || token === undefined) {
         /* Not authorized yet. */
         $('#error').text(
-          'Authorization error - Grant LeetHub access to your GitHub account to continue (launch extension to proceed)',
+          'Authorization error - Open the extension popup and paste your GitHub token first',
         );
         $('#error').show();
         $('#success').hide();
@@ -331,7 +331,7 @@ $('#hook_button').on('click', () => {
           if (!username) {
             /* Improper authorization. */
             $('#error').text(
-              'Improper Authorization error - Grant LeetHub access to your GitHub account to continue (launch extension to proceed)',
+              'Improper Authorization error - Open the extension popup and paste your GitHub token first',
             );
             $('#error').show();
             $('#success').hide();
@@ -387,7 +387,7 @@ $('#sync_counts').on('click', async () => {
   //Get token from storage
   const token = await chrome.storage.local.get('leethub_token').then(({ leethub_token }) => {
     if (leethub_token == null) {
-      $('#error').text('No token found - Please authorize LeetHub to access your GitHub account!');
+      $('#error').text('No token found - open the extension popup and paste your GitHub token first');
       $('#error').show();
       return;
     } else {

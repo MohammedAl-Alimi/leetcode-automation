@@ -4,30 +4,43 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../css/popup.css" />
     <script src="../js/static/jquery-3.3.1.min.js"></script>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="../css/static/semantic.min.css" />
     <script src="../js/static/semantic-2.4.1.min.js"></script>
   </head>
 
   <body>
     <div class="ui grid container">
       <div class="sixteen wide center aligned column">
-        <h1 id="title">Leet<span style="color: #ff6c0a">Hub</span>-3.0</h1>
+        <h1 id="title">Leet<span style="color: #ff6c0a">Hub</span> Secure</h1>
         <p id="caption">Sync your code from LeetCode to GitHub</p>
         <br />
-        <!-- Authentication mode -->
+        <!-- Token mode -->
         <div id="auth_mode" hidden>
           <p class="onboarding">
-            <br />
-            Authenticate with GitHub to use
-            <strong>Leet<span style="color: #ff6c0a">Hub</span></strong>
+            Paste a <strong>fine-grained GitHub token</strong> that can only write to your
+            LeetCode repo. It is stored locally in this browser and sent only to api.github.com.
           </p>
-          <button id="authenticate" class="ui secondary button">
+          <div class="ui form">
+            <div class="field">
+              <input
+                id="token_input"
+                type="password"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="github_pat_..."
+              />
+            </div>
+          </div>
+          <button id="save_token" class="ui secondary button">
             <i class="icon github"></i>
-            Authenticate
+            Save token
           </button>
+          <p id="token_error" hidden style="color: #d9534f"></p>
+          <p class="onboarding" style="font-size: 0.85em; opacity: 0.8">
+            How to create one: GitHub &rarr; Settings &rarr; Developer settings &rarr;
+            Fine-grained tokens. Repository access: only your LeetCode repo. Permissions:
+            Contents &rarr; Read and write.
+          </p>
         </div>
 
         <!-- Repo Hook mode -->
@@ -179,8 +192,8 @@
             <a
               style="color: cadetblue !important"
               target="_blank"
-              href="https://github.com/raphaelheinz/LeetHub-3.0/labels/feature"
-              >Request a feature!</a
+              href="https://github.com/MohammedAl-Alimi/leethub-secure"
+              >View source on GitHub</a
             >
           </div>
         </div>
@@ -188,17 +201,14 @@
 
       <!-- Generate Socials -->
       <div id="socials" class="sixteen wide column">
-        <a href="https://github.com/raphaelheinz/LeetHub-3.0" target="_blank">
+        <a href="https://github.com/MohammedAl-Alimi/leethub-secure" target="_blank">
           <i class="ui black github icon"></i>
         </a>
-        <a href="mailto:raphael.heinz.hof.university@gmail.com" target="_blank">
-          <i class="ui red envelope icon"></i>
-        </a>
+        <a id="forget_token" href="#" title="Forget saved token"><i class="ui red sign-out icon"></i></a>
         <a id="welcome_URL" href="" target="_blank"><i class="ui grey globe icon"></i></a>
       </div>
     </div>
 
-    <script src="../js/oauth2.js"></script>
     <script type="text/javascript" src="../js/popup.js"></script>
   </body>
 </html>

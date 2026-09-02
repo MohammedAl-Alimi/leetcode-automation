@@ -1,11 +1,47 @@
-/* global oAuth2 */
+const GITHUB_USER_URL = 'https://api.github.com/user';
+const TOKEN_PATTERN = /^(github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,})$/;
 
-let action = false;
+const showTokenError = msg => {
+  $('#token_error').text(msg).show();
+};
 
-$('#authenticate').on('click', () => {
-  if (action) {
-    oAuth2.begin();
+/* Validate a pasted token against GitHub, then store it locally. */
+$('#save_token').on('click', async () => {
+  const token = ($('#token_input').val() || '').trim();
+  $('#token_error').hide();
+  if (!TOKEN_PATTERN.test(token)) {
+    showTokenError('That does not look like a GitHub personal access token.');
+    return;
   }
+  try {
+    const res = await fetch(GITHUB_USER_URL, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' },
+    });
+    if (res.status !== 200) {
+      showTokenError(`GitHub rejected the token (HTTP ${res.status}).`);
+      return;
+    }
+    const { login } = await res.json();
+    await chrome.storage.local.set({ leethub_token: token, leethub_username: login });
+    $('#token_input').val('');
+    chrome.runtime.sendMessage({ action: 'tokenSaved' });
+    window.close();
+  } catch (e) {
+    showTokenError('Could not reach api.github.com.');
+  }
+});
+
+$('#token_input').on('keydown', e => {
+  if (e.key === 'Enter') $('#save_token').click();
+});
+
+/* Forget token: wipes the token and repo link from local storage. */
+$('#forget_token').on('click', e => {
+  e.preventDefault();
+  chrome.storage.local.remove(
+    ['leethub_token', 'leethub_username', 'leethub_hook', 'mode_type', 'stats'],
+    () => window.location.reload(),
+  );
 });
 
 $('#welcome_URL').attr('href', chrome.runtime.getURL('src/html/welcome.html'));
@@ -128,7 +164,6 @@ $('.commit-variable').on('click', function () {
 chrome.storage.local.get('leethub_token', data => {
   const token = data.leethub_token;
   if (token === null || token === undefined) {
-    action = true;
     $('#auth_mode').show();
   } else {
     // To validate user, load user object from GitHub.
@@ -163,11 +198,10 @@ chrome.storage.local.get('leethub_token', data => {
             }
           });
         } else if (xhr.status === 401) {
-          // bad oAuth: reset token and redirect to authorization process again!
+          // Token expired or revoked: clear it and ask for a new one.
           chrome.storage.local.set({ leethub_token: null }, () => {
-            console.log('BAD oAuth!!! Redirecting back to oAuth process');
-            action = true;
             $('#auth_mode').show();
+            showTokenError('Saved token was rejected by GitHub. Paste a new one.');
           });
         }
       }

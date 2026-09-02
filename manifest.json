@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "LeetHub-3.0",
-  "description": "Automatically integrate your Leetcode submissions to GitHub",
-  "homepage_url": "https://github.com/raphaelheinz/LeetHub-3.0",
-  "version": "0.0.16",
-  "author": "Raphael Heinz",
+  "name": "LeetHub Secure",
+  "description": "Push accepted LeetCode submissions to one GitHub repo using a fine-grained token you control. No OAuth, no third-party servers.",
+  "homepage_url": "https://github.com/MohammedAl-Alimi/leethub-secure",
+  "version": "1.0.0",
+  "author": "Mohammed Al-Alimi (fork of LeetHub-3.0 by Raphael Heinz)",
   "action": {
     "default_icon": "assets/thumbnail.png",
     "default_popup": "src/html/popup.html"
@@ -25,8 +25,7 @@
     {
       "matches": [
         "https://leetcode.com/*",
-        "https://leetcode.cn/*",
-        "https://github.com/*"
+        "https://leetcode.cn/*"
       ],
       "js": [
         "src/js/interceptor.js"
@@ -37,18 +36,16 @@
     {
       "matches": [
         "https://leetcode.com/*",
-        "https://leetcode.cn/*",
-        "https://github.com/*"
+        "https://leetcode.cn/*"
       ],
       "js": [
-        "src/js/leetcode.js",
-        "src/js/authorize.js"
+        "src/js/leetcode.js"
       ],
       "run_at": "document_idle"
     }
   ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://api.github.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:"
   },
   "web_accessible_resources": [
     {
