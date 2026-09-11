@@ -596,7 +596,7 @@ function addLeadingZeros(title) {
 }
 
 function formatStats(time, timePercentile, space, spacePercentile) {
-  return `Time: ${time} (${timePercentile}%), Space: ${space} (${spacePercentile}%) - LeetHub`;
+  return `Time: ${time} (${timePercentile}%), Space: ${space} (${spacePercentile}%) - LeetCode Automation`;
 }
 
 function getGitIcon() {
@@ -776,7 +776,7 @@ LeetCodeV1.prototype.findAndUploadCode = function (
               slicedText.indexOf("'") + 1,
               slicedText.lastIndexOf("'"),
             );
-            commitMsg = `Time: ${resultRuntime}, Memory: ${resultMemory} - LeetHub`;
+            commitMsg = `Time: ${resultRuntime}, Memory: ${resultMemory} - LeetCode Automation`;
           }
           if (code != null) {
             return uploadGit(
@@ -911,7 +911,7 @@ LeetCodeV1.prototype.parseStats = function () {
   const space = probStats[2].textContent;
   const spacePercentile = probStats[3].textContent;
 
-  return `Time: ${time} (${timePercentile}), Space: ${space} (${spacePercentile}) - LeetHub`;
+  return `Time: ${time} (${timePercentile}), Space: ${space} (${spacePercentile}) - LeetCode Automation`;
 };
 /* Parser function for the question, question title, question difficulty, and tags */
 LeetCodeV1.prototype.parseQuestion = function () {
@@ -1007,7 +1007,7 @@ LeetCodeV1.prototype.insertToAnchorElement = function (elem) {
     }
   }
 };
-/* Creates a ✔️ tick mark before "Run Code" button signaling LeetHub has done its job */
+/* Creates a ✔️ tick mark before "Run Code" button signaling LeetCode Automation has done its job */
 LeetCodeV1.prototype.markUploaded = function () {
   const elem = document.getElementById(this.progressSpinnerElementId);
   if (elem) {
@@ -1031,13 +1031,13 @@ LeetCodeV1.prototype.markUploadFailed = function () {
  */
 LeetCodeV2.prototype.injectAndListen = function () {
   window.addEventListener('leetHubSubmissionId', (event) => {
-    console.log('[LeetHub] Received submission ID:', event.detail.submissionId);
+    console.log('[LeetCode Automation] Received submission ID:', event.detail.submissionId);
     this.processSubmission(event.detail.submissionId);
   });
 
   window.addEventListener('leetHubSolutionPost', (event) => {
     const { questionSlug, content, title } = event.detail;
-    console.log('LeetHub: Received solution post event:', event.detail);
+    console.log('LeetCode Automation: Received solution post event:', event.detail);
     this.handleSolutionPost(questionSlug, content, title);
   });
 };
@@ -1133,7 +1133,7 @@ query submissionDetails($submissionId: ID!) {
   )
     .then(res => res.json())
     .then(res => (isCN ? res.data.submissionDetail : res.data.submissionDetails));
-  console.info('LeetHub:', { submissionDetailsData });
+  console.info('LeetCode Automation:', { submissionDetailsData });
   this.submissionData = submissionDetailsData;
 
   const questionDetailsQuery = {
@@ -1452,10 +1452,10 @@ chrome.storage.local.get('isSync', data => {
       });
     });
     chrome.storage.local.set({ isSync: true }, _ => {
-      console.log('LeetHub Synced to local values');
+      console.log('LeetCode Automation Synced to local values');
     });
   } else {
-    console.log('LeetHub Local storage already synced!');
+    console.log('LeetCode Automation Local storage already synced!');
   }
 });
 
@@ -1538,7 +1538,7 @@ const loader = (leetCode, suffix) => {
         date: getTodaysDate(),
         problemTopic: probStats.problemTopic,
       };
-      const probStatsCommitMsg = `Time: ${probStats.time} (${probStats.timePercentile}%), Space: ${probStats.space} (${probStats.spacePercentile}%) - LeetHub`; // default commit
+      const probStatsCommitMsg = `Time: ${probStats.time} (${probStats.timePercentile}%), Space: ${probStats.space} (${probStats.spacePercentile}%) - LeetCode Automation`; // default commit
       const commitMsg = (await getCustomCommitMessage(problemContext)) || probStatsCommitMsg;
 
       const { useTimestampFilename = false } =
@@ -1788,7 +1788,7 @@ function sortTopicsInReadme(markdownFile) {
   return markdownFile;
 }
 
-// Function to convert questionSlug to problemName using the same logic as LeetHub
+// Function to convert questionSlug to problemName using the same logic as LeetCode Automation
 async function questionSlugToProblemName(questionSlug) {
   // Query LeetCode GraphQL to get question details
   const questionDetailsQuery = {
@@ -1843,7 +1843,7 @@ async function getLastCommitMessage(problemName) {
     const { useLanguageFolder = false } = await chrome.storage.local.get('useLanguageFolder');
 
     if (!stats?.shas || !leethub_token || !leethub_hook) {
-      return 'Add solution post - LeetHub';
+      return 'Add solution post - LeetCode Automation';
     }
 
     // Try to find the exact problem name, or one that contains the problem name
@@ -1909,7 +1909,7 @@ async function getLastCommitMessage(problemName) {
             }
             
             // Look for commits that contain time/space stats (typical solution commits)
-            if (message.includes('Time:') && message.includes('Space:') && message.includes('LeetHub')) {
+            if (message.includes('Time:') && message.includes('Space:') && message.includes('LeetCode Automation')) {
               return message;
             }
             
@@ -1922,10 +1922,10 @@ async function getLastCommitMessage(problemName) {
     } catch (apiError) {
       // Silently handle API errors
     }
-    return 'Add solution post - LeetHub';
+    return 'Add solution post - LeetCode Automation';
   } catch (error) {
     console.error('Error getting last commit message:', error);
-    return 'Add solution post - LeetHub';
+    return 'Add solution post - LeetCode Automation';
   }
 }
 

@@ -1,14 +1,14 @@
 <div align="center">
-  <img src="assets/logo.png" alt="LeetHub Secure" width="640">
+  <img src="assets/logo.png" alt="LeetCode Automation" width="640">
 </div>
 
-# LeetHub Secure
+# LeetCode Automation
 
 A Chrome extension that pushes every accepted LeetCode submission to one GitHub repo the moment you pass all tests. It is a hardened fork of [LeetHub-3.0](https://github.com/raphaelheinz/LeetHub-3.0) by Raphael Heinz (MIT).
 
 ## What changed from upstream, and why
 
-| Upstream LeetHub-3.0 | LeetHub Secure |
+| Upstream LeetHub-3.0 | LeetCode Automation |
 | --- | --- |
 | GitHub OAuth with the `repo` scope: full read/write on **every** repo you own | You paste a **fine-grained token** limited to **one** repo |
 | OAuth client secret shipped inside the extension | No OAuth code at all |
@@ -24,7 +24,7 @@ The token is stored in `chrome.storage.local` and is only ever sent to `api.gith
 ### 1. Create a fine-grained GitHub token
 
 1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token.
-2. Token name: `leethub-secure`.
+2. Token name: `leetcode-automation`.
 3. Expiration: pick the longest you're comfortable with. You'll paste a new one when it expires.
 4. Repository access: **Only select repositories** → pick your LeetCode repo (create an empty one first if needed).
 5. Repository permissions: **Contents → Read and write**. Leave everything else at No access. (Metadata read is added automatically.)
@@ -38,7 +38,7 @@ The token is stored in `chrome.storage.local` and is only ever sent to `api.gith
 
 ### 3. Connect
 
-1. Click the LeetHub Secure icon in the toolbar, paste the token, click **Save token**.
+1. Click the LeetCode Automation icon in the toolbar, paste the token, click **Save token**.
 2. A welcome tab opens. Choose **Link an Existing Repository**, pick your LeetCode repo, click **Get Started**.
 3. Solve a problem on LeetCode. On Accepted, wait about four seconds for the spinner in the toolbar to finish. The file is now in your repo.
 

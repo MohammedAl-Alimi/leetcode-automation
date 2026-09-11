@@ -74,7 +74,7 @@ const createRepo = (token, name) => {
     private: true,
     auto_init: true,
     description:
-      'Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub Secure](https://github.com/MohammedAl-Alimi/leethub-secure)',
+      'Collection of LeetCode questions to ace the coding interview! - Created using [LeetCode Automation](https://github.com/MohammedAl-Alimi/leetcode-automation)',
   };
   data = JSON.stringify(data);
 
@@ -98,7 +98,7 @@ const linkStatusCode = (status, name) => {
     case 301:
       $('#success').hide();
       $('#error').html(
-        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to LeetHub. <br> This repository has been moved permenantly. Try creating a new one.`,
+        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to LeetCode Automation. <br> This repository has been moved permenantly. Try creating a new one.`,
       );
       $('#error').show();
       break;
@@ -106,7 +106,7 @@ const linkStatusCode = (status, name) => {
     case 403:
       $('#success').hide();
       $('#error').html(
-        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to LeetHub. <br> Forbidden action. Please make sure you have the right access to this repository.`,
+        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to LeetCode Automation. <br> Forbidden action. Please make sure you have the right access to this repository.`,
       );
       $('#error').show();
       break;
@@ -114,7 +114,7 @@ const linkStatusCode = (status, name) => {
     case 404:
       $('#success').hide();
       $('#error').html(
-        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to LeetHub. <br> Resource not found. Make sure you enter the right repository name.`,
+        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to LeetCode Automation. <br> Resource not found. Make sure you enter the right repository name.`,
       );
       $('#error').show();
       break;
@@ -212,7 +212,7 @@ const linkRepo = (token, name) => {
           // unable to gain access to repo in commit mode. Must switch to hook mode.
           /* Set mode type to hook */
           chrome.storage.local.set({ mode_type: 'hook' }, () => {
-            console.log(`Error linking ${name} to LeetHub`);
+            console.log(`Error linking ${name} to LeetCode Automation`);
           });
           /* Set Repo Hook to NONE */
           chrome.storage.local.set({ leethub_hook: null }, () => {
@@ -228,7 +228,7 @@ const linkRepo = (token, name) => {
           chrome.storage.local.set({ mode_type: 'commit', repo: res.html_url }, () => {
             $('#error').hide();
             $('#success').html(
-              `Successfully linked <a target="blank" href="${res.html_url}">${name}</a> to LeetHub. Start <a href="http://leetcode.com">LeetCoding</a> now!`,
+              `Successfully linked <a target="blank" href="${res.html_url}">${name}</a> to LeetCode Automation. Start <a href="http://leetcode.com">LeetCoding</a> now!`,
             );
             $('#success').show();
             $('#unlink').show();
@@ -506,7 +506,7 @@ chrome.storage.local.get('mode_type', data => {
       if (token === null || token === undefined) {
         /* Not authorized yet. */
         $('#error').text(
-          'Authorization error - Grant LeetHub access to your GitHub account to continue (click LeetHub extension on the top right to proceed)',
+          'Authorization error - Grant LeetCode Automation access to your GitHub account to continue (click LeetCode Automation extension on the top right to proceed)',
         );
         $('#error').show();
         $('#success').hide();
@@ -520,7 +520,7 @@ chrome.storage.local.get('mode_type', data => {
           if (!hook) {
             /* Not authorized yet. */
             $('#error').text(
-              'Improper Authorization error - Grant LeetHub access to your GitHub account to continue (click LeetHub extension on the top right to proceed)',
+              'Improper Authorization error - Grant LeetCode Automation access to your GitHub account to continue (click LeetCode Automation extension on the top right to proceed)',
             );
             $('#error').show();
             $('#success').hide();

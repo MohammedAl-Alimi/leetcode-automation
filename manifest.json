@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "LeetHub Secure",
+  "name": "LeetCode Automation",
   "description": "Push accepted LeetCode submissions to one GitHub repo using a fine-grained token you control. No OAuth, no third-party servers.",
-  "homepage_url": "https://github.com/MohammedAl-Alimi/leethub-secure",
+  "homepage_url": "https://github.com/MohammedAl-Alimi/leetcode-automation",
   "version": "1.0.0",
   "author": "Mohammed Al-Alimi (fork of LeetHub-3.0 by Raphael Heinz)",
   "action": {

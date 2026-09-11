@@ -57,7 +57,7 @@ $('#collapsible-commit-message-icon').click(() => {
 
     // if null, undefined, or an empty string, set default placeholder
     if (!commitMessage) {
-      $('#custom-commit-msg').attr('placeholder', 'Time: {time}, Space: {space} - LeetHub');
+      $('#custom-commit-msg').attr('placeholder', 'Time: {time}, Space: {space} - LeetCode Automation');
     } else {
       $('#custom-commit-msg').attr('placeholder', commitMessage);
       $('#custom-commit-msg').val(commitMessage);
@@ -149,7 +149,7 @@ $('#msg-save-btn').click(() => {
 
 $('#msg-reset-btn').click(() => {
   $('#custom-commit-msg').val('');
-  $('#custom-commit-msg').attr('placeholder', 'Time: {time}, Space: {space} - LeetHub'); // reset to default
+  $('#custom-commit-msg').attr('placeholder', 'Time: {time}, Space: {space} - LeetCode Automation'); // reset to default
   chrome.runtime.sendMessage({ action: 'customCommitMessageUpdated', message: null });
 });
 
