@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/logo.png" alt="LeetHub Secure" width="640">
+</div>
+
 # LeetHub Secure
 
 A Chrome extension that pushes every accepted LeetCode submission to one GitHub repo the moment you pass all tests. It is a hardened fork of [LeetHub-3.0](https://github.com/raphaelheinz/LeetHub-3.0) by Raphael Heinz (MIT).

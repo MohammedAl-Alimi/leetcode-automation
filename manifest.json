@@ -6,13 +6,19 @@
   "version": "1.0.0",
   "author": "Mohammed Al-Alimi (fork of LeetHub-3.0 by Raphael Heinz)",
   "action": {
-    "default_icon": "assets/thumbnail.png",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
     "default_popup": "src/html/popup.html"
   },
   "icons": {
-    "16": "assets/thumbnail.png",
-    "48": "assets/thumbnail.png",
-    "128": "assets/thumbnail.png"
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
   },
   "background": {
     "service_worker": "src/js/background.js"
@@ -49,8 +55,13 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["src/js/interceptor.js"],
-      "matches": ["https://leetcode.com/*", "https://leetcode.cn/*"]
+      "resources": [
+        "src/js/interceptor.js"
+      ],
+      "matches": [
+        "https://leetcode.com/*",
+        "https://leetcode.cn/*"
+      ]
     }
   ]
 }
